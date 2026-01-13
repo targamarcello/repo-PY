@@ -2,67 +2,56 @@ import socket
 import tkinter as tk
 from tkinter import messagebox
 
-# Impostazioni del server
-HOST = "127.0.0.1"   # Indirizzo IP del server (localhost)
-PORT = 5000         # Porta su cui il server è in ascolto
+host = "127.0.0.1"
+porta = 5000
+
+# Connessione al server (una sola volta)
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client_socket.connect((host, porta))
 
 
-def invia_messaggio():
-    """
-    Questa funzione viene eseguita quando premi il pulsante "Invia al server".
-    Legge il testo dall'Entry, apre una connessione socket, invia il messaggio
-    e riceve la risposta dal server.
-    """
+def invia_numero():
+    numero = num.get()
 
-    msg = entry.get()   # Legge il contenuto inserito nella casella di testo
-
-    # Controlla se l'utente ha lasciato il campo vuoto
-    if msg.strip() == "":
-        messagebox.showwarning("Attenzione", "Inserisci un messaggio")
+    if not numero.isdigit():
+        messagebox.showerror("Errore ⚠️", "Inserisci un numero valido")
         return
 
     try:
-        # Crea la socket del client
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client:
-            # Si connette al server (IP e porta)
-            client.connect((HOST, PORT))
+        # Invio del numero al server
+        client_socket.sendall(numero.encode())
 
-            # Invia il messaggio trasformandolo in bytes
-            client.sendall(msg.encode())
+        # Ricezione risposta
+        risposta = client_socket.recv(1024).decode()
 
-            # Riceve la risposta del server (max 1024 byte)
-            risposta = client.recv(1024).decode()
+        # Mostra risposta nell'area di testo
+        area_testo.insert(tk.END, f"Tentativo: {numero}\n")
+        area_testo.insert(tk.END, f"Server: {risposta}\n\n")
+        area_testo.see(tk.END)
 
-        # Mostra la risposta in una finestra popup
-        messagebox.showinfo("Risposta del server", risposta)
-
-    except ConnectionRefusedError:
-        # Caso in cui il server NON è avviato
-        messagebox.showerror("Errore", "Il server non è attivo.")
+    except:
+        messagebox.showerror("Errore ⚠️", "Connessione col server persa")
 
 
-# ===============================
-#        COSTRUZIONE GUI
-# ===============================
+# ---------------- GUI ----------------
 
-root = tk.Tk()            # Crea la finestra principale
-root.title("Client Python")
+root = tk.Tk()
+root.title("Gioco: Indovina il numero")
+root.geometry("400x350")
 
-# Frame per contenere gli elementi grafici (solo estetica)
 frame = tk.Frame(root, padx=20, pady=20)
 frame.pack()
 
-# Etichetta
-label = tk.Label(frame, text="Inserisci messaggio:")
+label = tk.Label(frame, text="Inserisci un numero (1-100):")
 label.pack()
 
-# Casella di input
-entry = tk.Entry(frame, width=40)
-entry.pack(pady=10)
+num = tk.Entry(frame, width=30)
+num.pack(pady=5)
 
-# Pulsante che richiama invia_messaggio()
-btn = tk.Button(frame, text="Invia al server", command=invia_messaggio)
-btn.pack()
+btn = tk.Button(frame, text="Prova", command=invia_numero)
+btn.pack(pady=5)
 
-# Avvia il loop grafico della finestra
+area_testo = tk.Text(frame, height=10, width=40)
+area_testo.pack(pady=10)
+
 root.mainloop()

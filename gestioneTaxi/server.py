@@ -19,10 +19,10 @@ def start_server():
         msg = client_socket.recv(1024).decode()
         print("Richiesta ricevuta:", msg)
 
-        global disponibilita
+        global disponibilita 
         if disponibilita > 0:
-            risposta = "Taxi disponibile. Numero taxi rimanenti: " + str(disponibilita - 1)
             disponibilita -= 1
+            risposta = "Taxi disponibile. Numero taxi rimanenti: " + str(disponibilita)            
         else:
             risposta = "Nessun taxi disponibile al momento."
         #invio della risposta al client

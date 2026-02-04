@@ -7,7 +7,7 @@ porta = 50000
 
 
 def invia_dati():
-    dati = text.get("1.0", tk.END).strip()
+    dati = text.get("1.0", tk.END).strip() #strip serve per togliere gli spazi bianchi
     if not dati:
         messagebox.showerror("Errore", "Nessun dato inserito.")
         return
@@ -29,7 +29,7 @@ root = tk.Tk()
 root.title("Monitoraggio Ambientale")
 
 # zona degli input
-label = tk.Label(root, taxt="Inserisci i dati (data,temp12,temp24): ")
+label = tk.Label(root, text="Inserisci i dati (data,temp12,temp24): ")
 label.pack()
 
 text = tk.Text(root, height=10, width=50)

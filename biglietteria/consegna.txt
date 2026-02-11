@@ -1,0 +1,26 @@
+Si richiede di sviluppare un’applicazione che simuli il funzionamento di una biglietteria cinematografica utilizzando un’architettura .Funzionamento generale
+gestisce i dati relativi ai film e calcola i prezzi dei biglietti.
+consente all’utente di acquistare i biglietti tramite un’interfaccia grafica.
+Requisiti del
+Il server deve:Avviarsi in ascolto di connessioni da parte dei client.All’avvio della connessione, inviare al client la lista dei film disponibili, indicando per ciascun film:
+Numero di biglietti disponibili
+Prezzo del biglietto
+Ricevere dal client:
+Il film selezionato
+Il numero di biglietti richiesti
+Calcolare:
+Il prezzo totale in base al costo del biglietto
+Eventuali sconti in funzione del numero di biglietti acquistati
+Inviare al client:
+Prezzo totale
+Sconto applicato
+Requisiti del
+Il client deve:Presentare un’interfaccia grafica (GUI).Mostrare la lista dei film ricevuta dal server e permettere all’utente di selezionarne uno.Consentire l’inserimento del numero di biglietti desiderati.Inviare al server i dati dell’acquisto.Visualizzare all’utente:
+Prezzo totale
+Sconto applicato
+Importo finale da pagare
+Requisiti aggiuntivi
+L’applicazione deve gestire correttamente gli , in particolare:
+Numero di biglietti pari a zero o negativo
+Valori non numerici
+L’utente deve essere in caso di input non valido.

@@ -1,0 +1,23 @@
+Prenotazione camere d’albergo
+
+Obiettivo
+Realizzare un’applicazione client–server per la prenotazione di camere d’albergo.Requisiti del server
+gestire camere con:
+tipologia;
+prezzo per notte;
+numero di camere disponibili;
+
+calcolare il costo in base alle notti;applicare sconti per soggiorni lunghi.Versione (console)
+selezione camera tramite menu testuale;
+inserimento numero di notti;
+visualizzazione del costo totale a console.
+
+Versione
+elenco camere in GUI;
+input grafico per le notti;
+riepilogo visivo del prezzo finale.
+
+Gestione degli errori
+numero di notti ≤ 0;
+input non numerici;
+camere non disponibili.
